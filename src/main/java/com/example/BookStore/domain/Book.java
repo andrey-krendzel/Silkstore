@@ -1,11 +1,44 @@
 package com.example.BookStore.domain;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+@Entity
 public class Book {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long isbn; 
 	private String title;
 	private String author;
 	private Integer year;
-	private String isbn; 
 	private Integer price;
+	
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
+	
+	public Book (long isbn, String title, String author, Integer year, Integer price, Category category) {
+		this.isbn = isbn;
+		this.title = title;
+		this.author = author;
+		this.year = year;
+		this.price = price;
+		this.category = category;
+	}
+	
+	public Book() {
+		
+	}
+	
 	
 	public String getTitle() {
 		return title;
@@ -25,10 +58,10 @@ public class Book {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-	public String getIsbn() {
+	public long getIsbn() {
 		return isbn;
 	}
-	public void setIsbn(String isbn) {
+	public void setIsbn(long isbn) {
 		this.isbn = isbn;
 	}
 	public Integer getPrice() {
@@ -37,5 +70,27 @@ public class Book {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	
+
+	
+	@Override
+	public String toString() {
+		if (this.category != null)
+		return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", year=" + year + ", price=" + price
+				+ ", category=" + category + "]";
+		else
+			return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", year=" + year + ", price=" + price
+					+ "]";
+	}
+	
 	
 }
