@@ -36,7 +36,7 @@ public class BookStoreApplicationController {
     @RequestMapping(value = "/add")
     public String addBook(Model model){
     	model.addAttribute("book", new Book());
-    	model.addAttribute("departments", drepository.findAll());
+    	model.addAttribute("categories", drepository.findAll());
         return "addBook";
     }     
     
