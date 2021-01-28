@@ -52,9 +52,12 @@ public class BookStoreApplicationController {
         return "redirect:../booklist";
     }     
     
+    // Edit book
+    
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String editBook(@PathVariable("id") Long isbn, Model model) {
-    	model.addAttribute("book", repository.findById(isbn));
+    public String editBook(@PathVariable("id") Long id, Model model) {
+    	model.addAttribute("book", repository.findById(id));
+    	model.addAttribute("categories", drepository.findAll());
         return "editBook";
     }     
 }

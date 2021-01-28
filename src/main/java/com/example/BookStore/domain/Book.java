@@ -14,8 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 public class Book {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	  @Id
+	  @GeneratedValue(strategy = GenerationType.AUTO)
+	  private long id;
+
+	  
 	private long isbn; 
 	private String title;
 	private String author;
