@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 public class Book {
@@ -25,8 +28,10 @@ public class Book {
 	private Integer year;
 	private Integer price;
 	
+
     @ManyToOne
     @JoinColumn(name = "categoryId")
+    @JsonManagedReference
     private Category category;
 	
 	public Book (long isbn, String title, String author, Integer year, Integer price, Category category) {
