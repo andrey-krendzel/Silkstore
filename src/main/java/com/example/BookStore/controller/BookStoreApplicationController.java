@@ -37,6 +37,21 @@ public class BookStoreApplicationController {
 		return "booklist";
 	}
 	
+    @RequestMapping(value={"/", "/home"})
+	public String homeSecure() {
+		return "home";
+	}  
+    
+    @RequestMapping(value="/hello")
+	public String helloSecure() {
+		return "hello";
+	}
+    
+    @RequestMapping(value="/login")
+	public String login() {
+		return "login";
+	}    
+	
 	// REST
     @RequestMapping(value="/books", method = RequestMethod.GET)
     public @ResponseBody List<Book> bookListRest() {	
@@ -45,7 +60,7 @@ public class BookStoreApplicationController {
 
 	// REST
     @RequestMapping(value="/books/{id}", method = RequestMethod.GET)
-    public @ResponseBody Optional<Book> findStudentRest(@PathVariable("id") Long bookId) {	
+    public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {	
     	return repository.findById(bookId);
     }       
 	
@@ -63,8 +78,8 @@ public class BookStoreApplicationController {
     }    
     
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteBook(@PathVariable("id") Long isbn, Model model) {
-    	repository.deleteById(isbn);
+    public String deleteBook(@PathVariable("id") Long id, Model model) {
+    	repository.deleteById(id);
         return "redirect:../booklist";
     }     
     

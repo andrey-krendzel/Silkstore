@@ -6,6 +6,11 @@
 </head>
 <body>
 	<h1>Books</h1>
+	<span>Logged in as: [[${#httpServletRequest.remoteUser}]]</span>
+	<br />
+	 <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
     <table>
 		<tr>
 		    <th>ISBN</th>
@@ -22,8 +27,8 @@
     		<td th:text="${book.year}"></td>
     		<td th:text="${book.price}"></td>
     		<td th:text="${book.category.name}"></td> 		
- 				<td><a th:href="@{/delete/{id}(id=${book.isbn})}">Delete</a></td>    		  
- 				<td><a th:href="@{/edit/{id}(id=${book.isbn})}">Edit</a></td>    
+ 				<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>    		  
+ 				<td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>    
     	</tr>
      </table>
 	 <a href="/add">Add Book</a>    	
