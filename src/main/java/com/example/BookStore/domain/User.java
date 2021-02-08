@@ -69,11 +69,11 @@ public class User {
 	}
 	
 	public String getEmail() {
-		return role;
+		return email;
 	}
 
-	public void setEmail(String role) {
-		this.role = role;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

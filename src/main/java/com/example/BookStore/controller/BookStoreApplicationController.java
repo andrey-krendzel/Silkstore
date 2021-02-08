@@ -32,21 +32,17 @@ public class BookStoreApplicationController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "/booklist", method = RequestMethod.GET)
+	@RequestMapping(value = "/productlist", method = RequestMethod.GET)
 	public String bookList(Model model) {
 		model.addAttribute("books", repository.findAll());
-		return "booklist";
+		return "productlist";
 	}
 	
     @RequestMapping(value={"/", "/home"})
 	public String homeSecure() {
-		return "home";
+		return "productlist";
 	}  
     
-    @RequestMapping(value="/hello")
-	public String helloSecure() {
-		return "hello";
-	}
     
     @RequestMapping(value="/login")
 	public String login() {

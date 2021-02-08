@@ -20,13 +20,15 @@ public class Book {
 	  @Id
 	  @GeneratedValue(strategy = GenerationType.AUTO)
 	  private long id;
+	  
+	  // id = productCode, let's operate from this assumption
 
 	  
-	private long isbn; 
+	//private long productCode; 
 	private String title;
-	private String author;
-	private Integer year;
+	private String seller;
 	private Integer price;
+	private Integer quantity; 
 	
 
     @ManyToOne
@@ -34,12 +36,12 @@ public class Book {
     @JsonManagedReference
     private Category category;
 	
-	public Book (long isbn, String title, String author, Integer year, Integer price, Category category) {
-		this.isbn = isbn;
+	public Book (String title, String seller, Integer price, Integer quantity, Category category) {
+		
 		this.title = title;
-		this.author = author;
-		this.year = year;
+		this.seller = seller;
 		this.price = price;
+		this.quantity = quantity;
 		this.category = category;
 	}
 	
@@ -58,29 +60,25 @@ public class Book {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getAuthor() {
-		return author;
+	public String getSeller() {
+		return seller;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setSeller(String seller) {
+		this.seller = seller;
 	}
-	public Integer getYear() {
-		return year;
-	}
-	public void setYear(Integer year) {
-		this.year = year;
-	}
-	public long getIsbn() {
-		return isbn;
-	}
-	public void setIsbn(long isbn) {
-		this.isbn = isbn;
-	}
+
 	public Integer getPrice() {
 		return price;
 	}
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+	
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 	
 	public Category getCategory() {
@@ -97,11 +95,11 @@ public class Book {
 	@Override
 	public String toString() {
 		if (this.category != null)
-		return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", year=" + year + ", price=" + price
-				+ ", category=" + category + "]";
+		return "Product [ + title=" + title + ", seller=" + seller + ", price=" + price
+				+ ", quantity =" + quantity + ", category=" + category + "]";
 		else
-			return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", year=" + year + ", price=" + price
-					+ "]";
+			return "Product [ title=" + title + ", seller=" + seller + "price=" + price
+					+ ", quantity =" + quantity + "]";
 	}
 	
 	

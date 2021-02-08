@@ -8,17 +8,18 @@
 	<h1>Add book</h1>
 	<div>
 		<form th:object="${book}" th:action="@{save}" action="#" method="post">
-		  	<label for="fname">ISBN</label>
-			<input type="text" id="fname" th:field="*{isbn}" />
+		  	<label for="fname">Product code</label>
+			<input type="text" id="fname" th:field="*{id}" readonly/>
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	<label for="lname">Title</label>
 			<input type="text" id="lname" th:field="*{title}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="email">Author</label>
-			<input type="text" th:field="*{author}" />
+		  	<label for="email">Seller</label>
+		<!-- 	<input type="text" th:field="*{seller}" value="" readonly/> -->
+		 <span sec:authentication="name">Bob</span>
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<label for="year">Year</label>
-			<input type="text" th:field="*{year}" />
+			<label for="year">Quantity</label>
+			<input type="text" th:field="*{quantity}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 				<label for="catlist">Category</label>
 			 <select id="catlist" th:field="*{category}" class="form-control">

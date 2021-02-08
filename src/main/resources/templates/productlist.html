@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div style="display:flex;">
+		<div style="margin: auto;">
+		<h1>Marketplace</h1>
+		 <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+		</div>
+		<div style="margin: auto; display:flex;">
+				<div style="margin:auto;">Logged in as: [[${#httpServletRequest.remoteUser}]]</div><p>&nbsp; &nbsp; </p>
+				 <div style="margin:auto;">
+				 <form th:action="@{/logout}" method="post">
+			            <input type="submit" value="Sign Out" style="background:blue; color:white;"/>
+			        </form>
+			       
+			        <a href="/login">Log in</a> | <a href="/signup">Sign up</a>
+			     </div>
+			
+			
+		</div>	
+				
+		        
+		 
+     </div>
+     
+    <table>
+		<tr>
+		    <th>Product code</th>
+		    <th>Title</th>
+		    <th>Seller</th>
+		    <th>Price</th>
+		    <th>Quantity</th>
+		    <th>Category</th>
+		</tr>  
+    	<tr th:each = "book : ${books}">
+    		<td th:text="${book.id}"></td>
+    		<td th:text="${book.title}"></td>
+    		<td th:text="${book.seller}"></td>
+    		<td th:text="${book.price}"></td>
+    		<td th:text="${book.quantity}"></td>
+    		<td th:text="${book.category.name}"></td> 		
+ 				<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>    		  
+ 				<td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>    
+    	</tr>
+     </table>
+	 <a href="/add">Add Product</a>    	
+</body>
+</html>
