@@ -3,6 +3,7 @@
 <head>
     <title>Booklist</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" th:href="@{css/style.css}" />
 </head>
 <body>
 	<h1>Add book</h1>
@@ -14,9 +15,10 @@
 		  	<label for="lname">Title</label>
 			<input type="text" id="lname" th:field="*{title}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="email">Seller</label>
-		<!-- 	<input type="text" th:field="*{seller}" value="" readonly/> -->
-		 <span sec:authentication="name">Bob</span>
+		  	<label for="email">Seller: </label>
+		  	<input th:text="${#authentication.getPrincipal().getUsername()}" th:field="*{seller}" />
+
+		<!--   <span sec:authentication="name">Bob</span>  -->
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<label for="year">Quantity</label>
 			<input type="text" th:field="*{quantity}" />

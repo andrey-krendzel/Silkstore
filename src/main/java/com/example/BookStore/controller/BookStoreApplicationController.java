@@ -32,17 +32,12 @@ public class BookStoreApplicationController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "/productlist", method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/home", "/productlist"}, method = RequestMethod.GET)
 	public String bookList(Model model) {
 		model.addAttribute("books", repository.findAll());
 		return "productlist";
 	}
-	
-    @RequestMapping(value={"/", "/home"})
-	public String homeSecure() {
-		return "productlist";
-	}  
-    
+
     
     @RequestMapping(value="/login")
 	public String login() {
@@ -71,7 +66,7 @@ public class BookStoreApplicationController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Book book){
         repository.save(book);
-        return "redirect:booklist";
+        return "redirect:productlist";
     }    
     
     // Delete student
@@ -79,7 +74,7 @@ public class BookStoreApplicationController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteStudent(@PathVariable("id") Long studentId, Model model) {
     	repository.deleteById(studentId);
-        return "redirect:../studentlist";
+        return "redirect:../productlist";
     }     
     
     // Edit book

@@ -18,11 +18,11 @@ import com.example.BookStore.domain.UserRepository;
 
 
 @SpringBootApplication
-public class BookStoreApplication {
-	private static final Logger log = LoggerFactory.getLogger(BookStoreApplication.class);
+public class StoreApplication {
+	private static final Logger log = LoggerFactory.getLogger(StoreApplication.class);
 	
 	public static void main(String[] args) {
-		SpringApplication.run(BookStoreApplication.class, args);
+		SpringApplication.run(StoreApplication.class, args);
 	}
 	
 	@Bean
@@ -37,12 +37,14 @@ public class BookStoreApplication {
 		drepository.save(new Category("Miscellaneous"));
 		
 		
-		///String title, String seller, Integer price, Integer quantity, Category category
+		///Book: String title, String seller, Integer price, Integer quantity, Category category
 		// Add standard items
 		
 		repository.save(new Book("The Fascist Manifesto", "Andrey", 20, 2, drepository.findByName("Books").get(0)));
+		repository.save(new Book("20kg Dumbell", "Andrey", 100, 1, drepository.findByName("Gym & Fitness").get(0)));
+		repository.save(new Book("Mint Cigarettes", "Andrey", 15, 1, drepository.findByName("Banned items").get(0)));
 	
-		// Create users: admin/admin user/user
+		// User: String username, String passwordHash, String role, String email
 		User user1 = new User("user", "$2y$12$PwYCv9Nfm4vRShh1h1RDZe1fxlocWz3EHPxWN.uYKN8d5NG6zXIjW", "USER",  "user@user.com");
 		User user2 = new User("admin", "$2y$12$F0sFhooRHkDu5tkvgyS/7OHoeykyTbY6TObn5xIc3euDD6mSGbJde", "ADMIN", "admin@admin.com");
 	

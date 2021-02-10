@@ -95,7 +95,7 @@ public class Book {
 	@Override
 	public String toString() {
 		if (this.category != null)
-		return "Product [ + title=" + title + ", seller=" + seller + ", price=" + price
+		return "Product [ title=" + title + ", seller=" + seller + ", price=" + price
 				+ ", quantity =" + quantity + ", category=" + category + "]";
 		else
 			return "Product [ title=" + title + ", seller=" + seller + "price=" + price
