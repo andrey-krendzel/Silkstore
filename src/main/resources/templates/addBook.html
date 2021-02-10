@@ -9,14 +9,12 @@
 	<h1>Add book</h1>
 	<div>
 		<form th:object="${book}" th:action="@{save}" action="#" method="post">
-		  	<label for="fname">Product code</label>
-			<input type="text" id="fname" th:field="*{id}" readonly/>
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	<label for="lname">Title</label>
 			<input type="text" id="lname" th:field="*{title}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	<label for="email">Seller: </label>
-		  	<input th:text="${#authentication.getPrincipal().getUsername()}" th:field="*{seller}" />
+		  	<input th:object="${seller}" th:field="*{seller}" />
 
 		<!--   <span sec:authentication="name">Bob</span>  -->
 			<div style="clear: both; display: block; height: 10px;"></div>

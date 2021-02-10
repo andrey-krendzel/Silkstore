@@ -26,9 +26,16 @@ public class Book {
 	  
 	//private long productCode; 
 	private String title;
-	private String seller;
 	private Integer price;
 	private Integer quantity; 
+	
+	// Join seller to user
+	@ManyToOne
+    @JoinColumn(name = "username")
+    @JsonManagedReference
+    private User seller;
+	
+	private String sellerUsername; 
 	
 
     @ManyToOne
@@ -36,13 +43,14 @@ public class Book {
     @JsonManagedReference
     private Category category;
 	
-	public Book (String title, String seller, Integer price, Integer quantity, Category category) {
+	public Book (String title, User seller, Integer price, Integer quantity, Category category) {
 		
 		this.title = title;
 		this.seller = seller;
 		this.price = price;
 		this.quantity = quantity;
 		this.category = category;
+		this.setSellerUsername(seller.getUsername());
 	}
 	
 	public Book() {
@@ -60,10 +68,15 @@ public class Book {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getSeller() {
+	public User getSeller() {
 		return seller;
 	}
-	public void setSeller(String seller) {
+	
+	public String getSellerUsername() {
+		return seller.getUsername();
+	}
+	
+	public void setSeller(User seller) {
 		this.seller = seller;
 	}
 
@@ -95,11 +108,15 @@ public class Book {
 	@Override
 	public String toString() {
 		if (this.category != null)
-		return "Product [ title=" + title + ", seller=" + seller + ", price=" + price
+		return "Product [ title=" + title + ", seller=" + seller.getUsername() + ", price=" + price
 				+ ", quantity =" + quantity + ", category=" + category + "]";
 		else
-			return "Product [ title=" + title + ", seller=" + seller + "price=" + price
+			return "Product [ title=" + title + ", seller=" + seller.getUsername() + "price=" + price
 					+ ", quantity =" + quantity + "]";
+	}
+
+	public void setSellerUsername(String sellerUsername) {
+		this.sellerUsername = sellerUsername;
 	}
 	
 	

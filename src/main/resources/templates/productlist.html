@@ -45,7 +45,7 @@
     		<!--  Find seller and display profile
     		<td><a th:href="@{/view/{id}(id=${user.id})}" th:text=${book.seller}></a></td> 
     		 -->  
-    		 <td><a th:href="@{/userlist}" th:text="${book.seller} + ' (View profile)'" ></a></td> 
+    		 <td><a th:href="@{/userlist}" th:text="${book.sellerUsername} + ' (View profile)'" ></a></td> 
     		<td th:text="${book.price}"></td>
     		<td th:text="${book.quantity}"></td>
     		<td th:text="${book.category.name}"></td> 		
