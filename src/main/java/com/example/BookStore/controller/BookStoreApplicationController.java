@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.BookStore.domain.Book;
 import com.example.BookStore.domain.BookRepository;
 import com.example.BookStore.domain.CategoryRepository;
+import com.example.BookStore.domain.UserRepository;
 
 
 
@@ -26,6 +27,9 @@ public class BookStoreApplicationController {
 	@Autowired
 	private CategoryRepository drepository; 
 	
+	@Autowired
+	private UserRepository urepository; 
+	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(Model model) {
 		model.addAttribute("books", repository.findAll());
@@ -36,6 +40,12 @@ public class BookStoreApplicationController {
 	public String bookList(Model model) {
 		model.addAttribute("books", repository.findAll());
 		return "productlist";
+	}
+	
+	@RequestMapping(value = {"/userlist"}, method = RequestMethod.GET)
+	public String userList(Model model) {
+		model.addAttribute("users", urepository.findAll());
+		return "userlist";
 	}
 
     
@@ -84,5 +94,13 @@ public class BookStoreApplicationController {
     	model.addAttribute("book", repository.findById(id));
     	model.addAttribute("categories", drepository.findAll());
         return "editBook";
-    }     
+    }    
+    
+    // View user profile
+    
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public String viewProfile(@PathVariable("id") Long id, Model model) {
+    	urepository.findById(id).ifPresent(o -> model.addAttribute("user", o));
+        return "profile";
+    } 
 }
