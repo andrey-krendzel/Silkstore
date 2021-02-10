@@ -36,6 +36,7 @@ public class Book {
     private User seller;
 	
 	private String sellerUsername; 
+	private String sellerId;
 	
 
     @ManyToOne
@@ -74,6 +75,10 @@ public class Book {
 	
 	public String getSellerUsername() {
 		return seller.getUsername();
+	}
+	
+	public Long getSellerId() {
+		return seller.getId();
 	}
 	
 	public void setSeller(User seller) {
@@ -117,6 +122,10 @@ public class Book {
 
 	public void setSellerUsername(String sellerUsername) {
 		this.sellerUsername = sellerUsername;
+	}
+
+	public void setSellerId(String sellerId) {
+		this.sellerId = sellerId;
 	}
 	
 	
