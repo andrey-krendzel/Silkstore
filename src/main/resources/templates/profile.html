@@ -31,19 +31,9 @@
 		<tr><td>User Code: </td> <td th:text="${user.id}"></td></tr>
 		<tr><td>Username: </td> <td><span th:if="${user.role == 'ADMIN'}" style="color:red;" th:text="${user.username}"></span>
     		<span th:if="${user.role == 'USER'}" th:text="${user.username}"></span></td></tr>
+    	<tr><td>Email: </td> <td th:text="${user.email}"></td></tr>
+    	<tr><td>Role: </td> <td th:text="${user.role}"></td></tr>
 		
-		    <th>User code</th>
-		    <th>Username</th>
-		    <th>Email</th>
-		    <th>Role</th>
-		</tr>  
-    	<tr>
-    		
-    		
-    		<td th:text="${user.email}"></td>
-    		<td><span th:if="${user.role == 'ADMIN'}" style="color:red;" th:text="${user.role}"></span>
-    		<span th:if="${user.role == 'USER'}" th:text="${user.role}"></span></td>	  
-    	</tr>
      </table>
 	<!--  <a href="/add">Add Product</a>     -->	
 </body>

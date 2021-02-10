@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.BookStore.domain.Book;
 import com.example.BookStore.domain.BookRepository;
 import com.example.BookStore.domain.CategoryRepository;
+import com.example.BookStore.domain.User;
 import com.example.BookStore.domain.UserRepository;
 
 
@@ -69,8 +70,9 @@ public class BookStoreApplicationController {
 	
     @RequestMapping(value = "/add")
     public String addBook(Model model){
-    	model.addAttribute("book", new Book());
-    	model.addAttribute("seller", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    	Book testBook = new Book();
+    	testBook.setSeller(urepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+    	model.addAttribute("book", testBook);
     	model.addAttribute("categories", drepository.findAll());
         return "addBook";
     }     

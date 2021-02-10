@@ -25,6 +25,9 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email; 
     
+    @Column(name = "money", nullable = false)
+    private float money; 
+    
     public User() {
     }
 
@@ -34,6 +37,7 @@ public class User {
 		this.passwordHash = passwordHash;
 		this.role = role;
 		this.email = email;
+		this.money = 0;
 	}
 
 	public Long getId() {
@@ -75,5 +79,14 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public Float getMoney() {
+		return money;
+	}
+
+	public void setMoney(Float money) {
+		this.money = money;
+	}
+
 
 }
