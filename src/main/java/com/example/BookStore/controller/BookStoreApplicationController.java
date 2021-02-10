@@ -41,6 +41,7 @@ public class BookStoreApplicationController {
 	@RequestMapping(value = {"/", "/home", "/productlist"}, method = RequestMethod.GET)
 	public String bookList(Model model) {
 		model.addAttribute("books", repository.findAll());
+		model.addAttribute("currentUsername", SecurityContextHolder.getContext().getAuthentication().getName());
 		return "productlist";
 	}
 	
@@ -84,10 +85,15 @@ public class BookStoreApplicationController {
     }    
     
     // Delete student
-    @PreAuthorize("hasAuthority('ADMIN')")
+    
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteStudent(@PathVariable("id") Long studentId, Model model) {
-    	repository.deleteById(studentId);
+    public String deleteProduct(@PathVariable("id") Long productId, Model model) {
+    	Book specificBook = repository.findById(productId).orElse(null);
+    	String sellerName = specificBook.getSellerUsername();
+    	if (sellerName.equals(SecurityContextHolder.getContext().getAuthentication().getName())) {
+    		repository.deleteById(productId);
+    	}
+    	System.out.println(sellerName + SecurityContextHolder.getContext().getAuthentication().getName());
         return "redirect:../productlist";
     }     
     
