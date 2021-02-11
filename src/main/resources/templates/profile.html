@@ -27,14 +27,41 @@
 		 
      </div>
      
-    <table>
+    <table style="background:white;">
 		<tr><td>User Code: </td> <td th:text="${user.id}"></td></tr>
-		<tr><td>Username: </td> <td><span th:if="${user.role == 'ADMIN'}" style="color:red;" th:text="${user.username}"></span>
-    		<span th:if="${user.role == 'USER'}" th:text="${user.username}"></span></td></tr>
-    	<tr><td>Email: </td> <td th:text="${user.email}"></td></tr>
-    	<tr><td>Role: </td> <td th:text="${user.role}"></td></tr>
-		
-     </table>
+	<tr><td>Username: </td> <td><span th:if="${user.role == 'ADMIN'}" style="color:red;" th:text="${user.username}"></span>
+		<span th:if="${user.role == 'USER'}" th:text="${user.username}"></span></td></tr>
+	<tr><td>Email: </td> <td th:text="${user.email}"></td></tr>
+	<tr><td>Role: </td> <td th:text="${user.role}"></td></tr>
+
+	</table>
+	<br />
+
+	<td th:if="${id == currentId}"><div class="your"><h2>This is your profile.</h2><h3>Deposit money to buy items</h3>
+
+		<form th:object="${book}" th:action="@{../save}" action="#" method="post">
+			<input type="hidden" id="id" th:field="*{id}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="lname">Title</label>
+			<input type="text" id="lname" th:field="*{title}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="email">Price</label>
+			<input type="text" th:field="*{price}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="year">Quantity</label>
+			<input type="text" th:field="*{quantity}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="price">Seller</label>
+			<input type="text" th:field="*{seller}" readonly/>
+			<label for="catlist">Category</label>
+			<select id="catlist" th:field="*{category}" class="form-control">
+				<option th:each="category: ${categories}" th:value="${category.categoryId}" th:text="${category.name}"></option>
+			</select>
+			<input type="submit" value="Save"></input>
+		</form>
+
+	</div>
+	</td>
 	<!--  <a href="/add">Add Product</a>     -->	
 </body>
 </html>

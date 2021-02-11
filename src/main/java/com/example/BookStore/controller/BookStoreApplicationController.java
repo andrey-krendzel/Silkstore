@@ -19,6 +19,7 @@ import com.example.BookStore.domain.CategoryRepository;
 import com.example.BookStore.domain.User;
 import com.example.BookStore.domain.UserRepository;
 
+import javax.validation.constraints.Null;
 
 
 @Controller
@@ -42,6 +43,14 @@ public class BookStoreApplicationController {
 	public String bookList(Model model) {
 		model.addAttribute("books", repository.findAll());
 		model.addAttribute("currentUsername", SecurityContextHolder.getContext().getAuthentication().getName());
+		User currentUser = urepository.findByUsername(
+				SecurityContextHolder.getContext().getAuthentication().getName()
+		);
+
+		if (currentUser != null) {
+			model.addAttribute("currentId", currentUser.getId());
+		}
+
 		return "productlist";
 	}
 	
@@ -67,7 +76,9 @@ public class BookStoreApplicationController {
     @RequestMapping(value="/books/{id}", method = RequestMethod.GET)
     public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {	
     	return repository.findById(bookId);
-    }       
+    }
+
+    // Add new product
 	
     @RequestMapping(value = "/add")
     public String addBook(Model model){
@@ -80,6 +91,7 @@ public class BookStoreApplicationController {
     
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Book book){
+		book.setSeller(urepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
         repository.save(book);
         return "redirect:productlist";
     }    
@@ -101,6 +113,7 @@ public class BookStoreApplicationController {
     
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editBook(@PathVariable("id") Long id, Model model) {
+
     	model.addAttribute("book", repository.findById(id));
     	model.addAttribute("categories", drepository.findAll());
         return "editBook";
@@ -110,7 +123,17 @@ public class BookStoreApplicationController {
     
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public String viewProfile(@PathVariable("id") Long id, Model model) {
+		// Find user by path id
     	urepository.findById(id).ifPresent(o -> model.addAttribute("user", o));
+    	// Determine current user
+		User currentUser = urepository.findByUsername(
+				SecurityContextHolder.getContext().getAuthentication().getName()
+		);
+		// Get current user id, send it to view
+		if (currentUser != null) {
+			model.addAttribute("currentId", currentUser.getId());
+		}
+
         return "profile";
     } 
 }

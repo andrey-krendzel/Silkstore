@@ -1,7 +1,5 @@
 package com.example.BookStore.domain;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,9 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -37,6 +32,8 @@ public class Book {
 	
 	private String sellerUsername; 
 	private String sellerId;
+
+	private String imageUrl;
 	
 
     @ManyToOne
@@ -44,8 +41,9 @@ public class Book {
     @JsonManagedReference
     private Category category;
 	
-	public Book (String title, User seller, Integer price, Integer quantity, Category category) {
-		
+	public Book (String title, User seller, Integer price, Integer quantity, Category category, String imageUrl) {
+
+		this.imageUrl = imageUrl;
 		this.title = title;
 		this.seller = seller;
 		this.price = price;
@@ -127,6 +125,13 @@ public class Book {
 	public void setSellerId(String sellerId) {
 		this.sellerId = sellerId;
 	}
-	
-	
+
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 }

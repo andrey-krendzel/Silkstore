@@ -7,10 +7,13 @@
     </head>
     
     <body>
-        <div th:if="${param.error}">
+
+        <div class="success" th:if="${param.error}">
             Invalid username and password.
         </div>
-        <div th:if="${param.logout}">
+
+
+        <div  class="success" th:if="${param.logout}">
             You have been logged out.
         </div>
         <h1>Login</h1>
